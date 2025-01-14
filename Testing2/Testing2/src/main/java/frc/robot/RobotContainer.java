@@ -8,6 +8,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DistanceMotor;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.SwitchMotor;
 import frc.robot.commands.TimeMotor;
 import frc.robot.subsystems.ExampleSubsystem;
 
@@ -58,6 +59,8 @@ public class RobotContainer {
     tab.add("EncoderReseter", Commands.runOnce(() -> m_exampleSubsystem.resetEncoder())).withWidget(BuiltInWidgets.kCommand);
     tab.add("DistanceMotor116", new DistanceMotor(m_exampleSubsystem, 116.0)).withWidget(BuiltInWidgets.kCommand);
     tab.add("DistanceMotor50", new DistanceMotor(m_exampleSubsystem, 50.0)).withWidget(BuiltInWidgets.kCommand);
+    tab.add("SwitchMotor", new SwitchMotor(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
+    
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));

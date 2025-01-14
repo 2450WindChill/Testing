@@ -13,7 +13,7 @@ public class DistanceMotor extends Command {
     private final ExampleSubsystem m_subsystem;
     private final double m_requiredDistance;
     double dist = 0;
-    double speed = 0.2;
+    double speed = 0;
 
     /**
      * Creates a new DistanceMotor.
@@ -36,13 +36,22 @@ public class DistanceMotor extends Command {
         } else {
             speed = -0.2;
         }
-        m_subsystem.testeruno.set(speed);
+        //m_subsystem.testeruno.set(speed);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         dist = m_subsystem.testeruno.getEncoder().getPosition();
+        double calc =  m_subsystem.slowDown.calculate(dist, m_requiredDistance);
+        if(calc > 0.2) {
+            calc = 0.2;
+        } else if (calc < -0.2) {
+            calc = -0.2;
+        }
+        m_subsystem.testeruno.set(calc);
+        System.out.println("Current distance:" + dist + " Target Distance: " + m_requiredDistance + " PID calculation: " + m_subsystem.slowDown.calculate(dist, m_requiredDistance));
+
     }
 
     // Called once the command ends or is interrupted.
