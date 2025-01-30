@@ -18,7 +18,7 @@ import com.ctre.phoenix.led.TwinkleAnimation.TwinklePercent;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class LEDBlueCommand extends Command {
+public class LEDStrobeCommand extends Command {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final ExampleSubsystem m_subsystem;
 
@@ -27,7 +27,7 @@ public class LEDBlueCommand extends Command {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public LEDBlueCommand(ExampleSubsystem subsystem) {
+  public LEDStrobeCommand(ExampleSubsystem subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -39,9 +39,9 @@ public class LEDBlueCommand extends Command {
     m_subsystem._LEDme.configBrightnessScalar(1);
 
     // m_subsystem._LEDme.setLEDs(162, 199, 250);
-    ColorFlowAnimation colorFlowAnimation = new ColorFlowAnimation(10, 153, 168, 0, 0.5, 68, Direction.Forward);
+     StrobeAnimation strobeAnimation = new StrobeAnimation(10, 153, 168, 0, 0.5, 68);
     // FireAnimation Arson = new FireAnimation();
-    m_subsystem._LEDme.animate(colorFlowAnimation);
+    m_subsystem._LEDme.animate(strobeAnimation);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -9,11 +9,14 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.DistanceMotor;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.LEDBlueCommand;
+import frc.robot.commands.LEDFireCommand;
+import frc.robot.commands.LEDStrobeCommand;
 import frc.robot.commands.SwitchMotor;
 import frc.robot.commands.TimeMotor;
 import frc.robot.subsystems.ExampleSubsystem;
 
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.ColorSensorV3.LEDPulseFrequency;
 import com.revrobotics.spark.SparkMax;
 
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -62,6 +65,8 @@ public class RobotContainer {
     tab.add("DistanceMotor50", new DistanceMotor(m_exampleSubsystem, 50.0)).withWidget(BuiltInWidgets.kCommand);
     tab.add("SwitchMotor", new SwitchMotor(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
     tab.add("LEDBlue", new LEDBlueCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
+    tab.add("LEDFire", new LEDFireCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
+    tab.add("LEDStrobe", new LEDStrobeCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
 
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
