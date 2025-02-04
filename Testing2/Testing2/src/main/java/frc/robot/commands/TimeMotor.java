@@ -29,7 +29,7 @@ public class TimeMotor extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.krakalakinTalonFX.set(.05);
+    // m_subsystem.krakalakinTalonFX.set(.05);
     timer.start();
   }
 
@@ -43,7 +43,6 @@ public class TimeMotor extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.krakalakinTalonFX.set(0);
     timer.stop();
     timer.reset();
   }

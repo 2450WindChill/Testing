@@ -13,6 +13,7 @@ import frc.robot.commands.LEDFireCommand;
 import frc.robot.commands.LEDStrobeCommand;
 import frc.robot.commands.SwitchMotor;
 import frc.robot.commands.TimeMotor;
+import frc.robot.subsystems.CoralSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 
 import com.revrobotics.RelativeEncoder;
@@ -37,6 +38,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  public final CoralSubsystem m_CoralSubsystem= new CoralSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -61,8 +63,8 @@ public class RobotContainer {
     ShuffleboardTab tab = Shuffleboard.getTab("testing");
     tab.add("TimeMotor", new TimeMotor(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
     tab.add("EncoderReseter", Commands.runOnce(() -> m_exampleSubsystem.resetEncoder())).withWidget(BuiltInWidgets.kCommand);
-    tab.add("DistanceMotor116", new DistanceMotor(m_exampleSubsystem, 116.0)).withWidget(BuiltInWidgets.kCommand);
-    tab.add("DistanceMotor50", new DistanceMotor(m_exampleSubsystem, 50.0)).withWidget(BuiltInWidgets.kCommand);
+    tab.add("DistanceMotor116", new DistanceMotor(m_CoralSubsystem, 116.0)).withWidget(BuiltInWidgets.kCommand);
+    tab.add("DistanceMotor50", new DistanceMotor(m_CoralSubsystem, 50.0)).withWidget(BuiltInWidgets.kCommand);
     tab.add("SwitchMotor", new SwitchMotor(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
     tab.add("LEDBlue", new LEDBlueCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
     tab.add("LEDFire", new LEDFireCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);

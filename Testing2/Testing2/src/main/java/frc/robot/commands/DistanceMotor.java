@@ -4,13 +4,14 @@
 
 package frc.robot.commands;
 
+import frc.robot.subsystems.CoralSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
 public class DistanceMotor extends Command {
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
-    private final ExampleSubsystem m_subsystem;
+    private final CoralSubsystem m_subsystem;
     private final double m_requiredDistance;
     double dist = 0;
     double speed = 0;
@@ -20,7 +21,7 @@ public class DistanceMotor extends Command {
      *
      * @param subsystem The subsystem used by this command.
      */
-    public DistanceMotor(ExampleSubsystem subsystem, double requiredDistance) {
+    public DistanceMotor(CoralSubsystem subsystem, double requiredDistance) {
         m_subsystem = subsystem;
         m_requiredDistance = requiredDistance;
         // Use addRequirements() here to declare subsystem dependencies.
@@ -30,7 +31,7 @@ public class DistanceMotor extends Command {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        dist = m_subsystem.testeruno.getEncoder().getPosition(); 
+        dist = m_subsystem.getElevatorMotorFx().getPosition().getValueAsDouble(); 
         if (dist < m_requiredDistance) {
             speed = 0.2;
         } else {
@@ -42,22 +43,22 @@ public class DistanceMotor extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        dist = m_subsystem.testeruno.getEncoder().getPosition();
-        double calc =  m_subsystem.slowDown.calculate(dist, m_requiredDistance);
+        dist = m_subsystem.getElevatorMotorFx().getPosition().getValueAsDouble(); 
+        double calc =  m_subsystem.getElevatorPIDcontroller().calculate(dist, m_requiredDistance);
         if(calc > 0.2) {
             calc = 0.2;
         } else if (calc < -0.2) {
             calc = -0.2;
         }
-        m_subsystem.testeruno.set(calc);
-        System.out.println("Current distance:" + dist + " Target Distance: " + m_requiredDistance + " PID calculation: " + m_subsystem.slowDown.calculate(dist, m_requiredDistance));
-
+        m_subsystem.getElevatorMotorFx().set(calc);
+        // System.out.println("Current distance:" + dist + " Target Distance: " + m_requiredDistance + " PID calculation: " + m_subsystem.slowDown.calculate(dist, m_requiredDistance));
+        System.out.println("Current distance:" + dist + " Target Distance: " + m_requiredDistance);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_subsystem.testeruno.set(0);
+        m_subsystem.getElevatorMotorFx().set(0);
     }
 
     // Returns true when the command should end.
