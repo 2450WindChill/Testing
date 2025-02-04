@@ -18,11 +18,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ExampleSubsystem extends SubsystemBase {
   public SparkMax testeruno = new SparkMax(1, MotorType.kBrushless);
-  public TalonFX krakalakinTalonFX = new TalonFX(3);
+
 
   public DutyCycleEncoder smartDutyCycleEncoder = new DutyCycleEncoder(0);
 
-  public PIDController slowDown = new PIDController(0.02, .001, 0);
+
   public DigitalInput switch1 = new DigitalInput(7);
   public DigitalInput switch2 = new DigitalInput(5);
   public CANdle _LEDme = new CANdle(5);
@@ -59,7 +59,7 @@ public class ExampleSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Encoder", testeruno.getEncoder().getPosition());
-    SmartDashboard.putNumber("krakenoneencoder", krakalakinTalonFX.getPosition().getValueAsDouble());
+    
 
     SmartDashboard.putBoolean("SwitchOne", switch1.get());
     SmartDashboard.putBoolean("SwitchTwo", switch2.get());
