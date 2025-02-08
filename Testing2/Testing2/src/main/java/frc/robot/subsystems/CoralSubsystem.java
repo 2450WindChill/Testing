@@ -17,33 +17,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class CoralSubsystem extends SubsystemBase {
-    private TalonFX elevatormotorFx = new TalonFX(3);
+    private TalonFX elevatorMotor = new TalonFX(2);
     private PIDController elevatorPidController = new PIDController(0.02, .001, 0);
 
     /** Creates a new ExampleSubsystem. */
     public CoralSubsystem() {
     }
-
-    /**
-     * Example command factory method.
-     *
-     * @return a command
-     */
-    public Command exampleMethodCommand() {
-        // Inline construction of command goes here.
-        // Subsystem::RunOnce implicitly requires `this` subsystem.
-        return runOnce(
-                () -> {
-                    /* one-time action goes here */
-                });
-    }
-
-    /**
-     * An example method querying a boolean state of the subsystem (for example, a
-     * digital sensor).
-     *
-     * @return value of some boolean subsystem state, such as a digital sensor.
-     */
+    
     public boolean exampleCondition() {
         // Query some boolean state, such as a digital sensor.
         return false;
@@ -51,17 +31,15 @@ public class CoralSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("elevator encoder", elevatormotorFx.getPosition().getValueAsDouble());
-
+        SmartDashboard.putNumber("elevator encoder", elevatorMotor.getPosition().getValueAsDouble());
     }
 
-    @Override
     public void simulationPeriodic() {
         // This method will be called once per scheduler run during simulation
     }
 
     public TalonFX getElevatorMotorFx() {
-        return elevatormotorFx;
+        return elevatorMotor;
     }
 
     public PIDController getElevatorPIDcontroller() {

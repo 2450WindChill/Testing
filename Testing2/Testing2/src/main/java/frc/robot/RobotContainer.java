@@ -11,6 +11,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.LEDBlueCommand;
 import frc.robot.commands.LEDFireCommand;
 import frc.robot.commands.LEDStrobeCommand;
+import frc.robot.commands.MoveElevatorToPosition;
 import frc.robot.commands.SwitchMotor;
 import frc.robot.commands.TimeMotor;
 import frc.robot.subsystems.CoralSubsystem;
@@ -26,6 +27,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -37,12 +39,12 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public final CoralSubsystem m_CoralSubsystem= new CoralSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  // private final CommandXboxController m_driverController =
+  //     new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -61,22 +63,25 @@ public class RobotContainer {
    */
   private void configureBindings() {
     ShuffleboardTab tab = Shuffleboard.getTab("testing");
-    tab.add("TimeMotor", new TimeMotor(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
-    tab.add("EncoderReseter", Commands.runOnce(() -> m_exampleSubsystem.resetEncoder())).withWidget(BuiltInWidgets.kCommand);
-    tab.add("DistanceMotor116", new DistanceMotor(m_CoralSubsystem, 116.0)).withWidget(BuiltInWidgets.kCommand);
-    tab.add("DistanceMotor50", new DistanceMotor(m_CoralSubsystem, 50.0)).withWidget(BuiltInWidgets.kCommand);
-    tab.add("SwitchMotor", new SwitchMotor(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
-    tab.add("LEDBlue", new LEDBlueCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
-    tab.add("LEDFire", new LEDFireCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
-    tab.add("LEDStrobe", new LEDStrobeCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
+    // tab.add("TimeMotor", new TimeMotor(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
+    // tab.add("EncoderReseter", Commands.runOnce(() -> m_exampleSubsystem.resetEncoder())).withWidget(BuiltInWidgets.kCommand);
+    // tab.add("DistanceMotor116", new DistanceMotor(m_CoralSubsystem, 116.0)).withWidget(BuiltInWidgets.kCommand);
+    // tab.add("DistanceMotor50", new DistanceMotor(m_CoralSubsystem, 50.0)).withWidget(BuiltInWidgets.kCommand);
+    // tab.add("SwitchMotor", new SwitchMotor(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
+    // tab.add("LEDBlue", new LEDBlueCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
+    // tab.add("LEDFire", new LEDFireCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
+    // tab.add("LEDStrobe", new LEDStrobeCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
+    tab.add("100", new MoveElevatorToPosition(m_CoralSubsystem, 100)).withWidget(BuiltInWidgets.kCommand);
+    tab.add("0", new MoveElevatorToPosition(m_CoralSubsystem, 0)).withWidget(BuiltInWidgets.kCommand);
+
 
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+    // new Trigger(m_exampleSubsystem::exampleCondition)
+    //     .onTrue(new ExampleCommand(m_exampleSubsystem));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    m_driverController.x().whileTrue(new ExampleCommand(m_exampleSubsystem));
+    // m_driverController.x().whileTrue(new ExampleCommand(m_exampleSubsystem));
   }
 
   /**
@@ -86,6 +91,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    // return Autos.exampleAuto(m_exampleSubsystem);
+    return new InstantCommand();
   }
 }
