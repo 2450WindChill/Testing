@@ -71,8 +71,12 @@ public class RobotContainer {
     // tab.add("LEDBlue", new LEDBlueCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
     // tab.add("LEDFire", new LEDFireCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
     // tab.add("LEDStrobe", new LEDStrobeCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
-    tab.add("100", new MoveElevatorToPosition(m_CoralSubsystem, 100)).withWidget(BuiltInWidgets.kCommand);
     tab.add("0", new MoveElevatorToPosition(m_CoralSubsystem, 0)).withWidget(BuiltInWidgets.kCommand);
+    tab.add("10", new MoveElevatorToPosition(m_CoralSubsystem, 10)).withWidget(BuiltInWidgets.kCommand);
+    tab.add("20", new MoveElevatorToPosition(m_CoralSubsystem, 20)).withWidget(BuiltInWidgets.kCommand);
+    tab.add("50", new MoveElevatorToPosition(m_CoralSubsystem, 50)).withWidget(BuiltInWidgets.kCommand);
+    tab.add("200", new MoveElevatorToPosition(m_CoralSubsystem, 200)).withWidget(BuiltInWidgets.kCommand);
+    tab.add("500", new MoveElevatorToPosition(m_CoralSubsystem, 500)).withWidget(BuiltInWidgets.kCommand);
 
 
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`

@@ -6,6 +6,8 @@ package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkMax;
 import com.ctre.phoenix.led.CANdle;
+import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
@@ -22,16 +24,36 @@ public class CoralSubsystem extends SubsystemBase {
 
     /** Creates a new ExampleSubsystem. */
     public CoralSubsystem() {
+        Slot0Configs slot0Configs = new Slot0Configs();
+        slot0Configs.kP = 2.4; // An error of 1 rotation results in 2.4 V output
+        slot0Configs.kI = 0; // no output for integrated error
+        slot0Configs.kD = 0.1; // A velocity of 1 rps results in 0.1 V output
+        elevatorMotor.getConfigurator().apply(slot0Configs);
+
     }
-    
-    public boolean exampleCondition() {
-        // Query some boolean state, such as a digital sensor.
-        return false;
+
+    public void setPIDGoal(int position) {
+        // create a position closed-loop request, voltage output, slot 0 configs
+        final PositionVoltage m_request = new PositionVoltage(0).withSlot(0);
+
+        // set position to 10 rotations
+        elevatorMotor.setControl(m_request.withPosition(position));
+    }
+
+    public boolean goalReached(int goal) {
+        double tolerance = 0.05;
+        double currentPosition = elevatorMotor.getPosition().getValueAsDouble();
+        if ((Math.abs(currentPosition - goal) < tolerance)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("elevator encoder", elevatorMotor.getPosition().getValueAsDouble());
+        SmartDashboard.putNumber("Elevator Encoder", elevatorMotor.getPosition().getValueAsDouble());
+        SmartDashboard.putNumber("Elevator Speed", elevatorMotor.get());
     }
 
     public void simulationPeriodic() {
