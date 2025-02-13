@@ -42,7 +42,7 @@ public class CoralSubsystem extends SubsystemBase {
     }
 
     public boolean goalReached(int goal) {
-        double tolerance = .1;
+        double tolerance = 0.05;
         double currentPosition = elevatorMotor.getPosition().getValueAsDouble();
         if ((Math.abs(currentPosition - goal) < tolerance)) {
             return true;
@@ -57,8 +57,9 @@ public class CoralSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Elevator Speed", elevatorMotor.get());
         SmartDashboard.putBoolean("elevatorswitch", elevatorswitch.get());
 
-        if(elevatorswitch.get()){
-            elevatorMotor.setPosition(0);
+        if(!elevatorswitch.get()){
+            zeroElevatorMotor();
+            resetEncoder();
         }
     }
 
@@ -73,5 +74,15 @@ public class CoralSubsystem extends SubsystemBase {
     public PIDController getElevatorPIDcontroller() {
         return elevatorPidController;
     }
+
+    public void resetEncoder() {
+        elevatorMotor.setPosition(0);
+    }
+
+    public void zeroElevatorMotor() {
+        elevatorMotor.set(0);
+    }
+
+    
 
 }
