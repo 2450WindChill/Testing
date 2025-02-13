@@ -22,6 +22,7 @@ public class CoralSubsystem extends SubsystemBase {
     private TalonFX elevatorMotor = new TalonFX(2);
     private PIDController elevatorPidController = new PIDController(0.02, .001, 0);
 
+    public DigitalInput elevatorswitch = new DigitalInput(0);
     /** Creates a new ExampleSubsystem. */
     public CoralSubsystem() {
         Slot0Configs slot0Configs = new Slot0Configs();
@@ -41,7 +42,7 @@ public class CoralSubsystem extends SubsystemBase {
     }
 
     public boolean goalReached(int goal) {
-        double tolerance = 0.05;
+        double tolerance = .1;
         double currentPosition = elevatorMotor.getPosition().getValueAsDouble();
         if ((Math.abs(currentPosition - goal) < tolerance)) {
             return true;
@@ -54,6 +55,11 @@ public class CoralSubsystem extends SubsystemBase {
     public void periodic() {
         SmartDashboard.putNumber("Elevator Encoder", elevatorMotor.getPosition().getValueAsDouble());
         SmartDashboard.putNumber("Elevator Speed", elevatorMotor.get());
+        SmartDashboard.putBoolean("elevatorswitch", elevatorswitch.get());
+
+        if(elevatorswitch.get()){
+            elevatorMotor.setPosition(0);
+        }
     }
 
     public void simulationPeriodic() {

@@ -39,7 +39,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+ private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public final CoralSubsystem m_CoralSubsystem= new CoralSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -68,9 +68,9 @@ public class RobotContainer {
     // tab.add("DistanceMotor116", new DistanceMotor(m_CoralSubsystem, 116.0)).withWidget(BuiltInWidgets.kCommand);
     // tab.add("DistanceMotor50", new DistanceMotor(m_CoralSubsystem, 50.0)).withWidget(BuiltInWidgets.kCommand);
     // tab.add("SwitchMotor", new SwitchMotor(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
-    // tab.add("LEDBlue", new LEDBlueCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
-    // tab.add("LEDFire", new LEDFireCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
-    // tab.add("LEDStrobe", new LEDStrobeCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
+    tab.add("LEDBlue", new LEDBlueCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
+    tab.add("LEDFire", new LEDFireCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
+    tab.add("LEDStrobe", new LEDStrobeCommand(m_exampleSubsystem)).withWidget(BuiltInWidgets.kCommand);
     tab.add("0", new MoveElevatorToPosition(m_CoralSubsystem, 0)).withWidget(BuiltInWidgets.kCommand);
     tab.add("10", new MoveElevatorToPosition(m_CoralSubsystem, 10)).withWidget(BuiltInWidgets.kCommand);
     tab.add("20", new MoveElevatorToPosition(m_CoralSubsystem, 20)).withWidget(BuiltInWidgets.kCommand);

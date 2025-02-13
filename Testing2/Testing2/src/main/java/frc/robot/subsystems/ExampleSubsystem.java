@@ -20,7 +20,6 @@ public class ExampleSubsystem extends SubsystemBase {
   public SparkMax testeruno = new SparkMax(1, MotorType.kBrushless);
 
 
-  public DutyCycleEncoder smartDutyCycleEncoder = new DutyCycleEncoder(0);
 
 
   public DigitalInput switch1 = new DigitalInput(7);
